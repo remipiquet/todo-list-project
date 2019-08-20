@@ -103,9 +103,10 @@
 			callback.call(this, todos);
 		} else {
 
-    		// Assign an ID
-			updateData.id = parseInt(newId);
-    
+			// Assign an ID //TODO: génère un identifiant unique à partir des millisecondes écoulées depuis le 1er janvier 1970 à 00:00
+			let date = new Date();
+			updateData.id = date.getTime(); //TODO: changer en Date.now()
+			console.log(updateData.id);
 
 			todos.push(updateData);
 			localStorage[this._dbName] = JSON.stringify(data);

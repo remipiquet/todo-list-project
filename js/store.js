@@ -103,10 +103,22 @@
 			callback.call(this, todos);
 		} else {
 
-			// Assign an ID //TODO: génère un identifiant unique à partir des millisecondes écoulées depuis le 1er janvier 1970 à 00:00
-			updateData.id = Date.now(); //TODO: Ajouter une première partie en plus (comme sur les factures)
+			// Assign an ID 
+			
+			// Math.random should be unique because of its seeding algorithm.
+  			// Convert it to base 36 (numbers + letters), and grab the first 9 characters
+  			// after the decimal.
+			let randomString = Math.random().toString(36).substr(2, 9);
+			// Return the number of milliseconds since 1970/01/01 at 00:00
+			let date = Date.now();
+			updateData.id = date + '_' + randomString; 
 			console.log(updateData.id);
+			console.log(todos[index]);
 
+			for (let index = 0; index < todos.length; index++) {
+				const element = todos[index];
+				
+			}
 			todos.push(updateData);//TODO: vérifier avant s'il n'y a pas déjà cet ID
 			localStorage[this._dbName] = JSON.stringify(data);
 			callback.call(this, [updateData]);

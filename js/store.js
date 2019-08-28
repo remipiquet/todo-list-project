@@ -113,13 +113,8 @@
 			let date = Date.now();
 			updateData.id = date + '_' + randomString; 
 			console.log(updateData.id);
-			console.log(todos[index]);
-
-			for (let index = 0; index < todos.length; index++) {
-				const element = todos[index];
-				
-			}
-			todos.push(updateData);//TODO: vérifier avant s'il n'y a pas déjà cet ID
+			
+			todos.push(updateData);
 			localStorage[this._dbName] = JSON.stringify(data);
 			callback.call(this, [updateData]);
 		}

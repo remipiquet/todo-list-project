@@ -5,4 +5,6 @@ Projet 8 de la formation OpenClassrooms **Développeur d'applications Front-End*
 
 Amélioration d'un projet existant, mise en place de tests unitaires, optimisation de performance, rédaction de la documentation utilisateur et technique
 
+![todoList](http://remipiquet.org/todolist/img/todoListMain.jpg)
+
 [Voir l'application en ligne](https://www.remipiquet.org/todolist/)

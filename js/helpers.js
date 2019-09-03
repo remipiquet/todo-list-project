@@ -3,6 +3,12 @@
 	'use strict';
 
 	// Get element(s) by CSS selector:
+	/**
+	 * Get element(s) by CSS selector (qs = querySelector)
+	 * @param {string} selector CSS element
+	 * @param {string} scope Scope of element
+	 */
+
 	window.qs = function (selector, scope) {
 		return (scope || document).querySelector(selector);
 	};

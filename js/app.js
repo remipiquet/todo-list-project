@@ -5,7 +5,7 @@
 	/**
 	 * Sets up a brand new Todo list.
 	 *
-	 * @param {string} name The name of your new to do list.
+	 * @param {string} name The name of your new todo list.
 	 */
 	function Todo(name) {
 		this.storage = new app.Store(name);
@@ -15,8 +15,14 @@
 		this.controller = new app.Controller(this.model, this.view);
 	}
 
+	/*
+	* Define a new Todo
+	*/
 	var todo = new Todo('todos-vanillajs');
 
+	/*
+	* Add route of the page in URL '' || active || completed
+	*/
 	function setView() {
 		todo.controller.setView(document.location.hash);
 	}

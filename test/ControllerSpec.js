@@ -60,11 +60,18 @@ describe('controller', function () {
 
 	it('should show entries on start-up', function () {
 		// TODO: write test
+		// Teste le modèle et la vue au 1er lancement (liste de Todos vide)
+		setUpModel([]);
+
+		subject.setView('');
+
+		expect(view.render).toHaveBeenCalledWith('showEntries', [])
 	});
 
 	describe('routing', function () {
 
 		it('should show all entries without a route', function () {
+			// Teste le modèle et la vue au lancement avec un élément dans la liste de Todos
 			var todo = {title: 'my todo'};
 			setUpModel([todo]);
 
@@ -74,6 +81,7 @@ describe('controller', function () {
 		});
 
 		it('should show all entries without "all" route', function () {
+			// Teste le modèle et la vue avec tous les éléments ('all' || 'active' ||'completed')
 			var todo = {title: 'my todo'};
 			setUpModel([todo]);
 
@@ -84,14 +92,29 @@ describe('controller', function () {
 
 		it('should show active entries', function () {
 			// TODO: write test
+			// Teste le modèle et la vue avec les éléments 'active'
+			var todo = {title: 'my todo', completed: false};
+			setUpModel([todo]);
+
+			subject.setView('#/active');
+
+			expect(view.render).toHaveBeenCalledWith('showEntries', [todo]);
 		});
 
-		it('should show completed entries', function () {
+		it('should show completed entries', function () { //FIXME: celui là était mal réglé ? Il était sur 'completed : false'
 			// TODO: write test
+			// Teste le modèle et la vue avec les éléments 'completed'
+			var todo = {title: 'my todo', completed: true};
+			setUpModel([todo]);
+
+			subject.setView('#/completed');
+
+			expect(model.read).toHaveBeenCalledWith({completed: true}, jasmine.any(Function));
 		});
 	});
 
 	it('should show the content block when todos exists', function () {
+		// Teste si le bloc de contenu s'affiche quand il y a des Todos
 		setUpModel([{title: 'my todo', completed: true}]);
 
 		subject.setView('');
@@ -102,6 +125,7 @@ describe('controller', function () {
 	});
 
 	it('should hide the content block when no todos exists', function () {
+		// Teste si le bloc de contenu se masque quand il n'y a pas de Todos
 		setUpModel([]);
 
 		subject.setView('');
@@ -112,6 +136,7 @@ describe('controller', function () {
 	});
 
 	it('should check the toggle all button, if all todos are completed', function () {
+		// Teste si le bouton 'toggle' passe en classe 'toggle-all' lorsque les Todos sont cochées
 		setUpModel([{title: 'my todo', completed: true}]);
 
 		subject.setView('');
@@ -122,6 +147,7 @@ describe('controller', function () {
 	});
 
 	it('should set the "clear completed" button', function () {
+		// Teste si le bouton 'clear completed' s'affiche lorsque les Todos sont cochées
 		var todo = {id: 42, title: 'my todo', completed: true};
 		setUpModel([todo]);
 
@@ -134,29 +160,73 @@ describe('controller', function () {
 	});
 
 	it('should highlight "All" filter by default', function () {
+		// Teste si le bouton 'All' est activé par défaut
 		// TODO: write test
+		setUpModel([]);
+
+		subject.setView('');
+
+		expect(view.render).toHaveBeenCalledWith('setFilter', '');
 	});
 
 	it('should highlight "Active" filter when switching to active view', function () {
+		// Teste si le bouton 'Active' est activé lorsque l'on passe en vue 'active'
 		// TODO: write test
+		setUpModel([]);
+
+		subject.setView('#/active');
+
+		expect(view.render).toHaveBeenCalledWith('setFilter', 'active');
 	});
 
 	describe('toggle all', function () {
 		it('should toggle all todos to completed', function () {
+			// Teste le bouton pour cocher toutes les taches
 			// TODO: write test
+			var todos = [{id: 21, title: 'my todo', completed: false},
+						{id: 42, title: 'another todo', completed: false}
+						]
+			setUpModel(todos);
+
+			subject.setView('');
+
+			view.trigger('toggleAll', {completed: true});
+
+			expect(model.update).toHaveBeenCalledWith(21, {completed: true}, jasmine.any(Function)); // FIXME: A quoi correspond jasmine.any(Function) ?
+			expect(model.update).toHaveBeenCalledWith(42, {completed: true}, jasmine.any(Function));
 		});
 
 		it('should update the view', function () {
+			// Teste si la vue se met à jour lorsqu'on clique sur l'élément 'toggle all'
 			// TODO: write test
+			var todos = [{id: 21, title: 'todo', completed: false},
+						{id: 42, title: 'another todo', completed: false}
+						]
+			setUpModel([todos]);
+
+			subject.setView('');
+
+			view.trigger('toggleAll', {completed: false});
+
+			expect(view.render).toHaveBeenCalledWith('updateElementCount', 1);
 		});
 	});
 
 	describe('new todo', function () {
 		it('should add a new todo to the model', function () {
+			// Teste l'ajout d'une tache dans le modèle
 			// TODO: write test
+			setUpModel([]);
+
+			subject.setView('');
+
+			view.trigger('newTodo', 'a new todo');
+
+			expect(model.create).toHaveBeenCalledWith('a new todo', jasmine.any(Function));
 		});
 
 		it('should add a new todo to the view', function () {
+			// Teste l'ajout d'une tache dans la vue
 			setUpModel([]);
 
 			subject.setView('');
@@ -181,6 +251,7 @@ describe('controller', function () {
 		});
 
 		it('should clear the input field when a new todo is added', function () {
+			// Teste si le champ de saisie se vide lors de la validation d'une nouvelle tache
 			setUpModel([]);
 
 			subject.setView('');
@@ -193,10 +264,20 @@ describe('controller', function () {
 
 	describe('element removal', function () {
 		it('should remove an entry from the model', function () {
+			// Teste la suppression d'une entrée dans le modèle
 			// TODO: write test
+			var todo = {id: 42, title: 'my todo', completed: true};
+			setUpModel([todo]);
+
+			subject.setView('');
+
+			view.trigger('itemRemove', {id: 42});
+
+			expect(model.remove).toHaveBeenCalledWith(42, jasmine.any(Function));
 		});
 
 		it('should remove an entry from the view', function () {
+			// Teste la suppression d'une entrée dans la vue
 			var todo = {id: 42, title: 'my todo', completed: true};
 			setUpModel([todo]);
 
@@ -207,6 +288,7 @@ describe('controller', function () {
 		});
 
 		it('should update the element count', function () {
+			// Teste le compteur de taches lorsqu'on supprime un élément
 			var todo = {id: 42, title: 'my todo', completed: true};
 			setUpModel([todo]);
 
@@ -219,6 +301,7 @@ describe('controller', function () {
 
 	describe('remove completed', function () {
 		it('should remove a completed entry from the model', function () {
+			// Teste la suppression d'une entrée 'completed' dans le modèle
 			var todo = {id: 42, title: 'my todo', completed: true};
 			setUpModel([todo]);
 
@@ -230,6 +313,7 @@ describe('controller', function () {
 		});
 
 		it('should remove a completed entry from the view', function () {
+			// Teste la suppression d'une entrée 'completed' dans la vue
 			var todo = {id: 42, title: 'my todo', completed: true};
 			setUpModel([todo]);
 
@@ -242,6 +326,7 @@ describe('controller', function () {
 
 	describe('element complete toggle', function () {
 		it('should update the model', function () {
+			// Teste la mise à jour du statut 'completed' d'un élément dans le modèle
 			var todo = {id: 21, title: 'my todo', completed: false};
 			setUpModel([todo]);
 			subject.setView('');
@@ -252,6 +337,7 @@ describe('controller', function () {
 		});
 
 		it('should update the view', function () {
+			// Teste la mise à jour du statut 'completed' d'un élément dans la vue
 			var todo = {id: 42, title: 'my todo', completed: true};
 			setUpModel([todo]);
 			subject.setView('');
@@ -264,6 +350,7 @@ describe('controller', function () {
 
 	describe('edit item', function () {
 		it('should switch to edit mode', function () {
+			// Teste l'entrée en mode édition lorsqu'on double clique sur un élément
 			var todo = {id: 21, title: 'my todo', completed: false};
 			setUpModel([todo]);
 
@@ -275,6 +362,7 @@ describe('controller', function () {
 		});
 
 		it('should leave edit mode on done', function () {
+			// Teste la sortie du mode édition
 			var todo = {id: 21, title: 'my todo', completed: false};
 			setUpModel([todo]);
 
@@ -286,6 +374,7 @@ describe('controller', function () {
 		});
 
 		it('should persist the changes on done', function () {
+			// Teste la persistance des données du modèle
 			var todo = {id: 21, title: 'my todo', completed: false};
 			setUpModel([todo]);
 
@@ -297,6 +386,7 @@ describe('controller', function () {
 		});
 
 		it('should remove the element from the model when persisting an empty title', function () {
+			// Teste la suppression d'un élément du molèle lorsque le titre est vide
 			var todo = {id: 21, title: 'my todo', completed: false};
 			setUpModel([todo]);
 
@@ -308,6 +398,7 @@ describe('controller', function () {
 		});
 
 		it('should remove the element from the view when persisting an empty title', function () {
+			// Teste la suppression d'un élément de la vue lorsque le titre est vide
 			var todo = {id: 21, title: 'my todo', completed: false};
 			setUpModel([todo]);
 
@@ -319,6 +410,7 @@ describe('controller', function () {
 		});
 
 		it('should leave edit mode on cancel', function () {
+			// Teste l'annulation du mode édition en cas d'annulation 
 			var todo = {id: 21, title: 'my todo', completed: false};
 			setUpModel([todo]);
 
@@ -330,6 +422,7 @@ describe('controller', function () {
 		});
 
 		it('should not persist the changes on cancel', function () {
+			// Teste la non persistance des données du modèle lors d'une annulation
 			var todo = {id: 21, title: 'my todo', completed: false};
 			setUpModel([todo]);
 

@@ -102,17 +102,8 @@
 			localStorage[this._dbName] = JSON.stringify(data);
 			callback.call(this, todos);
 		} else {
-
 			// Assign an ID 
-			
-			// Math.random should be unique because of its seeding algorithm.
-  			// Convert it to base 36 (numbers + letters), and grab the first 9 characters
-  			// after the decimal.
-			let randomString = Math.random().toString(36).substr(2, 9);
-			// Return the number of milliseconds since 1970/01/01 at 00:00
-			let date = Date.now();
-			updateData.id = date + '_' + randomString; 
-			console.log(updateData.id);
+			updateData.id = Date.now(); // Return the number of milliseconds since 1970/01/01 at 00:00
 			
 			todos.push(updateData);
 			localStorage[this._dbName] = JSON.stringify(data);

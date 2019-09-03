@@ -49,7 +49,7 @@
 	/**
 	 * Loads and initialises the view
 	 *
-	 * @param {string} '' | 'active' | 'completed'
+	 * @param {string} locationHash '' | 'active' | 'completed'
 	 */
 	Controller.prototype.setView = function (locationHash) {
 		var route = locationHash.split('/')[1];
@@ -91,8 +91,9 @@
 	/**
 	 * An event to fire whenever you want to add an item. Simply pass in the event
 	 * object and it'll handle the DOM insertion and saving of the new item.
+	 * @param {string} title Title of the Todo element
 	 */
-	Controller.prototype.addItem = function (title) {
+	Controller.prototype.addItem = function (title) { // STEP 1 : fix function's name
 		var self = this;
 
 		if (title.trim() === '') {
@@ -105,9 +106,11 @@
 		});
 	};
 
-	/*
+	/**
 	 * Triggers the item editing mode.
+	 * @param {string} id ID of the Todo element
 	 */
+
 	Controller.prototype.editItem = function (id) {
 		var self = this;
 		self.model.read(id, function (data) {
@@ -115,9 +118,12 @@
 		});
 	};
 
-	/*
+	/**
 	 * Finishes the item editing mode successfully.
+	 * @param {string} id ID of the Todo element
+	 * @param {string} title Title of the Todo element
 	 */
+	
 	Controller.prototype.editItemSave = function (id, title) {
 		var self = this;
 
@@ -138,9 +144,11 @@
 		}
 	};
 
-	/*
+	/**
 	 * Cancels the item editing mode.
+	 * @param {string} id ID of the Todo element
 	 */
+
 	Controller.prototype.editItemCancel = function (id) {
 		var self = this;
 		self.model.read(id, function (data) {
@@ -162,7 +170,7 @@
 			items = data;
 		});
 
-		items.forEach(function(item) {
+		items.forEach(function(item) { //TODO: console.log pas au bon endroit et boucle forEach inutile
 			if (item.id === id) {
 				console.log("Element with ID: " + id + " has been removed.");
 			}
@@ -192,7 +200,6 @@
 	/**
 	 * Give it an ID of a model and a checkbox and it will update the item
 	 * in storage based on the checkbox's state.
-	 *
 	 * @param {number} id The ID of the element to complete or uncomplete
 	 * @param {object} checkbox The checkbox to check the state of complete
 	 *                          or not
@@ -215,6 +222,7 @@
 	/**
 	 * Will toggle ALL checkboxes' on/off state and completeness of models.
 	 * Just pass in the event object.
+	 * @param {object} completed Element completed in TodoList
 	 */
 	Controller.prototype.toggleAll = function (completed) {
 		var self = this;
@@ -267,6 +275,7 @@
 
 	/**
 	 * Simply updates the filter nav's selected states
+	 * @param {string} currentPage '' || active || completed Current page route
 	 */
 	Controller.prototype._updateFilterState = function (currentPage) {
 		// Store a reference to the active route, allowing us to re-filter todo

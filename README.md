@@ -32,3 +32,17 @@ Controller.prototype.addItem  =  function (title) {
 };
 ```
 
+Le second bug introduit un conflit éventuel entre deux IDs identiques.
+Il est situé dans le fichier `store.js` au sein de la fonction suivante :
+```javascript
+Store.prototype.save
+```
+J'ai donc choisi après plusieurs tests d'appliquer la méthode suivante :
+```javascript
+// Assign an ID
+updateData.id  =  Date.now(); // Return the number of milliseconds since 1970/01/01 at 00:00
+todos.push(updateData);
+localStorage[this._dbName] =  JSON.stringify(data);
+callback.call(this, [updateData]);
+```
+La méthode `Date.now()` appliquée à cette fonction permet de donner un identifiant unique basé sur le nombre de millisecondes écoulées depuis le 1er janvier 1970 à 00:00. Cela permet donc à l'application d'éviter d'avoir d'éventuels IDs identiques.

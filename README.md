@@ -63,3 +63,21 @@ function getFile(file, callback) {
     };
 }
 ```
+
+Dans le fichier `controller.js`, la boucle `forEach` est inutile. Le `console.log` a été déplacé dans la fonction `self.model.remove`:
+```javascript
+Controller.prototype.removeItem = function (id) {
+    var self = this;
+    var items;
+    self.model.read(function(data) {
+	items = data;
+    });
+    // FIXME: suppression de la boucle forEach inutile et décalage du console.log
+    self.model.remove(id, function () {
+	self.view.render('removeItem', id);
+	console.log("Element with ID: " + id + " has been removed.");
+    });
+    self._filter();
+    };
+    ```
+    

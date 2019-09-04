@@ -87,4 +87,4 @@ Dans un premier temps, il convient d'installer NPM et Node.js afin de pouvoir d�
 
 Pour lancer les test unitaires, ouvrez dans votre navigateur le fichier suivant à la racine du projet : `./test/SpecRunner.html`
 
-Le fichier code des tests Jasmine se trouve à l'emplacement suivant : [controllerSpec.js](https://github.com/remipiquet/todo-list-project/blob/master/test/ControllerSpec.js)
+Le fichier code des tests Jasmine se trouve à l'emplacement suivant : **[controllerSpec.js](https://github.com/remipiquet/todo-list-project/blob/master/test/ControllerSpec.js)**

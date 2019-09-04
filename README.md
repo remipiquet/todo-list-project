@@ -81,7 +81,7 @@ Controller.prototype.removeItem = function (id) {
 };
 ```
 
-## Etape 1 : Ou sont les tests ?!
+## Etape 2 : Ou sont les tests ?!
 
 Dans un premier temps, il convient d'installer NPM et Node.js afin de pouvoir déployer Jasmine.
 

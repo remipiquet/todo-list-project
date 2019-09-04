@@ -78,6 +78,11 @@ Controller.prototype.removeItem = function (id) {
 	console.log("Element with ID: " + id + " has been removed.");
     });
     self._filter();
-    };
-    ```
-    
+};
+```
+
+## Etape 1 : Ou sont les tests ?!
+
+Dans un premier temps, il convient d'installer NPM et Node.js afin de pouvoir déployer Jasmine.
+Pour lancer les test unitaires, ouvrez dans votre navigateur le fichier suivant à la racine du projet : `./test/SpecRunner.html`
+Le fichier code des tests Jasmine se trouve à l'emplacement suivant : 

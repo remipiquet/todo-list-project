@@ -46,3 +46,20 @@ localStorage[this._dbName] =  JSON.stringify(data);
 callback.call(this, [updateData]);
 ```
 La méthode `Date.now()` appliquée à cette fonction permet de donner un identifiant unique basé sur le nombre de millisecondes écoulées depuis le 1er janvier 1970 à 00:00. Cela permet donc à l'application d'éviter d'avoir d'éventuels IDs identiques.
+
+Le `console.log` présent dans le fichier `base.js` a été replacé pour ne plus afficher de texte dans la console de déboggage :
+```javascript
+function getFile(file, callback) {
+    if (!location.host) {
+        return location.host;
+    }
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', findRoot() + file, true);
+    xhr.send();
+    xhr.onload = function () {
+        if (xhr.status === 200 && callback) {
+            callback(xhr.responseText);
+	}
+    };
+}
+```

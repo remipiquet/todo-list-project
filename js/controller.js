@@ -169,15 +169,10 @@
 		self.model.read(function(data) {
 			items = data;
 		});
-
-		items.forEach(function(item) { //TODO: console.log pas au bon endroit et boucle forEach inutile
-			if (item.id === id) {
-				console.log("Element with ID: " + id + " has been removed.");
-			}
-		});
-
+		// FIXME: suppression de la boucle forEach inutile et décalage du console.log
 		self.model.remove(id, function () {
 			self.view.render('removeItem', id);
+			console.log("Element with ID: " + id + " has been removed.");
 		});
 
 		self._filter();

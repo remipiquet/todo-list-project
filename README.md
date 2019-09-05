@@ -95,5 +95,5 @@ J'ai donc repris la structure en place et appliqué les mêmes méthodes pour ef
 
 ## Etape 3 : optimisez la performance
 
-Voir le wiki **[Audit de performance]()**
+Voir le wiki **[Audit de performance](https://github.com/remipiquet/todo-list-project/wiki/Audit-todolistme.net)**
 

@@ -109,7 +109,7 @@ describe('controller', function () {
 
 			subject.setView('#/completed');
 
-			expect(model.read).toHaveBeenCalledWith({completed: true}, jasmine.any(Function));
+			expect(model.read).toHaveBeenCalledWith({completed: true}, jasmine.any(Function)); //FIXME: c'est quoi le jasmine.any ???
 		});
 	});
 
@@ -136,7 +136,7 @@ describe('controller', function () {
 	});
 
 	it('should check the toggle all button, if all todos are completed', function () {
-		// Teste si le bouton 'toggle' passe en classe 'toggle-all' lorsque les Todos sont cochées
+		// Teste le bouton 'toggle' lorsque les Todos sont cochées
 		setUpModel([{title: 'my todo', completed: true}]);
 
 		subject.setView('');

@@ -92,3 +92,8 @@ Le fichier code des tests Jasmine se trouve à l'emplacement suivant : **[Contro
 J'ai donc repris la structure en place et appliqué les mêmes méthodes pour effectuer les tests qui n'étaient pas développés.
 
 <-- work on new tests -->
+
+## Etape 3 : optimisez la performance
+
+Voir le wiki **[Audit de performance]()**
+

@@ -94,7 +94,17 @@ Le fichier code des tests Jasmine se trouve à l'emplacement suivant : **[Contro
 
 J'ai donc repris la structure en place et appliqué les mêmes méthodes pour effectuer les tests qui n'étaient pas développés.
 
-<-- work on new tests -->
+Le test suivant a été ajouté :
+```javascript
+it('should highlight "Completed" filter when switching to completed view', function () {
+    // Teste si le bouton 'Completed' est activé lorsque l'on passe en vue 'conpleted'
+    // TODO: added test
+	var todo = {id: 42, title: "my todo", completed: true};
+	setUpModel([todo]);
+	subject.setView("#/completed");
+	expect(view.render).toHaveBeenCalledWith("setFilter", "completed");
+	});
+```
 
 ## Etape 3 : optimisez la performance
 

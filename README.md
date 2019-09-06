@@ -65,6 +65,7 @@ function getFile(file, callback) {
     }
 }
 ```
+Une erreur liée à la requette CORS apparaitra en local mais pas en ligne (https).
 
 Dans le fichier `controller.js`, la boucle `forEach` est inutile. Le `console.log` a été déplacé dans la fonction `self.model.remove`:
 ```javascript

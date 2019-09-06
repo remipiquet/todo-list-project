@@ -47,20 +47,22 @@ callback.call(this, [updateData]);
 ```
 La méthode `Date.now()` appliquée à cette fonction permet de donner un identifiant unique basé sur le nombre de millisecondes écoulées depuis le 1er janvier 1970 à 00:00. Cela permet donc à l'application d'éviter d'avoir d'éventuels IDs identiques.
 
-Le `console.log` présent dans le fichier `base.js` a été replacé pour ne plus afficher de texte dans la console de déboggage :
+La boucle if de la fonction `getFile` présente en ligne 137 du fichier `base.js` a été remplacée par l'instruction "try-catch" :
 ```javascript
 function getFile(file, callback) {
-    if (!location.host) {
-        return location.host;
+    try {
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', findRoot() + file, true);
+	xhr.send();
+	xhr.onload = function () {
+	    if (xhr.status === 200 && callback) {
+		callback(xhr.responseText);
+	    }
+	};
     }
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', findRoot() + file, true);
-    xhr.send();
-    xhr.onload = function () {
-        if (xhr.status === 200 && callback) {
-            callback(xhr.responseText);
-	}
-    };
+    catch (error){
+	console.error(error);
+    }
 }
 ```
 

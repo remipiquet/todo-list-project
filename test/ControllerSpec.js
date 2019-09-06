@@ -58,6 +58,8 @@ describe('controller', function () {
 		subject = new app.Controller(model, view);
 	});
 
+	//TODO: test si on crée une tache, qu'on la supprime, et qu'on en récrée une nomée pareille, elle doit avoir un ID différent de la première
+
 	it('should show entries on start-up', function () {
 		// TODO: write test
 		// Teste le modèle et la vue au 1er lancement (liste de Todos vide)
@@ -65,7 +67,7 @@ describe('controller', function () {
 
 		subject.setView('');
 
-		expect(view.render).toHaveBeenCalledWith('showEntries', [])
+		expect(view.render).toHaveBeenCalledWith('showEntries', []);
 	});
 
 	describe('routing', function () {
@@ -109,7 +111,7 @@ describe('controller', function () {
 
 			subject.setView('#/completed');
 
-			expect(model.read).toHaveBeenCalledWith({completed: true}, jasmine.any(Function)); //FIXME: c'est quoi le jasmine.any ???
+			expect(model.read).toHaveBeenCalledWith({completed: true}, jasmine.any(Function));
 		});
 	});
 

@@ -106,7 +106,12 @@ it('should highlight "Completed" filter when switching to completed view', funct
 	});
 ```
 
-## Etape 3 : optimisez la performance
+## Etape 3 : Optimisez la performance
 
 Voir le wiki **[Audit de performance](https://github.com/remipiquet/todo-list-project/wiki/Audit-todolistme.net)**
+
+
+## Etape 4 : Améliorez le projet
+
+Voir la documentation utilisateur **[Documentation utilisateur](https://github.com/remipiquet/todo-list-project/wiki/Documentation-utilisateur)**
 

@@ -113,5 +113,5 @@ Voir le wiki **[Audit de performance](https://github.com/remipiquet/todo-list-pr
 
 ## Etape 4 : Améliorez le projet
 
-Voir la documentation utilisateur **[Documentation utilisateur](https://github.com/remipiquet/todo-list-project/wiki/Documentation-utilisateur)**
+Voir le wiki **[Documentation utilisateur](https://github.com/remipiquet/todo-list-project/wiki/Documentation-utilisateur)**
 

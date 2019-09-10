@@ -115,3 +115,4 @@ Voir le wiki **[Audit de performance](https://github.com/remipiquet/todo-list-pr
 
 Voir le wiki **[Documentation utilisateur](https://github.com/remipiquet/todo-list-project/wiki/Documentation-utilisateur)**
 
+Voir le wiki **[Documentation technique](https://github.com/remipiquet/todo-list-project/wiki/Documentation-technique)**

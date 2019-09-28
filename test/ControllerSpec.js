@@ -58,6 +58,8 @@ describe('controller', function () {
 		subject = new app.Controller(model, view);
 	});
 
+	//TODO: test si on crée une tache, qu'on la supprime, et qu'on en récrée une nomée pareille, elle doit avoir un ID différent de la première
+
 	it('should show entries on start-up', function () {
 		// TODO: write test
 		// Teste le modèle et la vue au 1er lancement (liste de Todos vide)
@@ -97,7 +99,6 @@ describe('controller', function () {
 			setUpModel([todo]);
 
 			subject.setView('#/active');
-			view.trigger('toggleAll', {completed: false});
 
 			expect(view.render).toHaveBeenCalledWith('showEntries', [todo]);
 		});
@@ -179,17 +180,6 @@ describe('controller', function () {
 
 		expect(view.render).toHaveBeenCalledWith('setFilter', 'active');
 	});
-	
-	it('should highlight "Completed" filter when switching to completed view', function () {
-		// Teste si le bouton 'Completed' est activé lorsque l'on passe en vue 'conpleted'
-		// TODO: added test
-		var todo = {id: 42, title: "my todo", completed: true};
-		setUpModel([todo]);
-
-		subject.setView("#/completed");
-
-		expect(view.render).toHaveBeenCalledWith("setFilter", "completed");
-	});
 
 	describe('toggle all', function () {
 		it('should toggle all todos to completed', function () {
@@ -204,7 +194,7 @@ describe('controller', function () {
 
 			view.trigger('toggleAll', {completed: true});
 
-			expect(model.update).toHaveBeenCalledWith(21, {completed: true}, jasmine.any(Function)); // FIXME: A quoi correspond jasmine.any(Function) ?
+			expect(model.update).toHaveBeenCalledWith(21, {completed: true}, jasmine.any(Function));
 			expect(model.update).toHaveBeenCalledWith(42, {completed: true}, jasmine.any(Function));
 		});
 

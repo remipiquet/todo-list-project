@@ -181,6 +181,15 @@ describe('controller', function () {
 		expect(view.render).toHaveBeenCalledWith('setFilter', 'active');
 	});
 
+	it('should highlight "Completed" filter when switching to completed view', function () {
+		// Teste si le bouton 'Completed' est activé lorsque l'on passe en vue 'conpleted'
+		// TODO: added test
+		var todo = {id: 42, title: "my todo", completed: true};
+		setUpModel([todo]);
+		subject.setView("#/completed");
+		expect(view.render).toHaveBeenCalledWith("setFilter", "completed");
+		});
+
 	describe('toggle all', function () {
 		it('should toggle all todos to completed', function () {
 			// Teste le bouton pour cocher toutes les taches
@@ -194,7 +203,7 @@ describe('controller', function () {
 
 			view.trigger('toggleAll', {completed: true});
 
-			expect(model.update).toHaveBeenCalledWith(21, {completed: true}, jasmine.any(Function));
+			expect(model.update).toHaveBeenCalledWith(21, {completed: true}, jasmine.any(Function)); // FIXME: A quoi correspond jasmine.any(Function) ?
 			expect(model.update).toHaveBeenCalledWith(42, {completed: true}, jasmine.any(Function));
 		});
 
